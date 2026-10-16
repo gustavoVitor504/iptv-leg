@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>iptv-leg</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+    <script type="module" src="/src/main.js" defer></script>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <nav class="tabs" role="tablist">
+          <button role="tab" data-tab="live" aria-selected="true">TV ao vivo</button>
+          <button role="tab" data-tab="movies" aria-selected="false">Filmes</button>
+          <button role="tab" data-tab="series" aria-selected="false">Séries</button>
+        </nav>
+        <button id="open-sources" class="ghost">Fontes</button>
+      </header>
+
+      <div class="app">
+        <aside class="guide">
+          <div class="filters">
+            <input id="search" type="search" placeholder="Buscar canal" />
+            <select id="group" aria-label="Grupo"></select>
+          </div>
+          <ul id="channels" class="channels"></ul>
+          <p id="status" class="status" role="status"></p>
+        </aside>
+
+        <main class="stage">
+          <section id="player" class="player">
+            <video id="video" controls playsinline></video>
+            <button id="back" class="back" hidden>← Voltar</button>
+            <div id="osd" class="osd" hidden>
+              <span id="osd-number" class="osd-number"></span>
+              <span id="osd-name" class="osd-name"></span>
+            </div>
+            <p id="empty" class="empty">Escolha um canal na lista para começar.<br />Use ↑ e ↓ para trocar de canal.</p>
+          </section>
+
+          <section id="catalog" class="catalog" hidden>
+            <ul id="grid" class="grid"></ul>
+            <div id="sentinel" class="sentinel"></div>
+          </section>
+
+          <section id="detail" class="detail" hidden></section>
+        </main>
+      </div>
+    </div>
+
+    <dialog id="sources" class="sources">
+      <form id="sources-form">
+        <h2>Fontes</h2>
+        <fieldset>
+          <legend>Lista M3U</legend>
+          <input id="playlist-url" type="url" placeholder="Endereço da lista M3U (opcional)" />
+        </fieldset>
+        <fieldset>
+          <legend>Xtream Codes</legend>
+          <input id="xt-server" placeholder="Servidor, ex.: http://exemplo.com:8080" autocomplete="off" />
+          <input id="xt-user" placeholder="Usuário" autocomplete="off" />
+          <input id="xt-pass" type="password" placeholder="Senha" autocomplete="off" />
+        </fieldset>
+        <p class="hint">Use uma ou as duas fontes. Os dados ficam salvos só neste computador.</p>
+        <p id="sources-error" class="sources-error" role="alert"></p>
+        <div class="actions">
+          <button type="button" id="sources-cancel">Cancelar</button>
+          <button type="submit" class="primary">Salvar e carregar</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>
